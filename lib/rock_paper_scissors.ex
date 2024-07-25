@@ -12,9 +12,9 @@ defmodule Games.RockPaperScissors do
     answer = String.trim(IO.gets("Choose rock, paper, or scissors: "))
 
     cond do
-      answer == ai_answer -> "It's a tie!"
-      beats?(answer, ai_answer) -> "You win! #{answer} beats #{ai_answer}."
-      true -> "You lose! #{ai_answer} beats #{answer}."
+      answer == ai_answer -> IO.puts("It's a tie!")
+      beats?(answer, ai_answer) -> IO.puts("You win! #{answer} beats #{ai_answer}.")
+      true -> IO.puts("You lose! #{ai_answer} beats #{answer}.")
     end
   end
 

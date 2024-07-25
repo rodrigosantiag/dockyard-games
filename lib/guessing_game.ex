@@ -19,7 +19,7 @@ defmodule Games.GuessingGame do
   def play(), do: do_play(generate_number(), 5)
 
   @spec do_play(integer(), integer()) :: String.t()
-  defp do_play(number, 0), do: "You lose! the answer was #{number}"
+  defp do_play(number, 0), do: IO.puts("You lose! the answer was #{number}")
 
   defp do_play(number, max_attempts) do
     input_number = String.trim(IO.gets("Guess a number between 1 and 10: "))
@@ -35,7 +35,7 @@ defmodule Games.GuessingGame do
         do_play(number, max_attempts - 1)
 
       true ->
-        "Correct!"
+        IO.puts("Correct!")
     end
   end
 

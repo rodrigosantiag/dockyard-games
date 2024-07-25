@@ -7,7 +7,8 @@ defmodule Games.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      escript: [main_module: Games]
     ]
   end
 
@@ -21,7 +22,7 @@ defmodule Games.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:dialyxir, "~> 1.4"},
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 1.7"},
       {:ex_doc, "~> 0.34.2"}
     ]
