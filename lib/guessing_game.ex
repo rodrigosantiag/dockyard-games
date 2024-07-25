@@ -5,6 +5,15 @@ defmodule Games.GuessingGame do
 
   @doc """
   Play the game
+
+  ## Examples
+    iex> Games.GuessingGame.play()
+    Guess a number between 1 and 10: 5
+    Too Low!
+    Guess a number between 1 and 10: 8
+    Too High!
+    Guess a number between 1 and 10: 7
+    Correct!
   """
   @spec play() :: String.t()
   def play(), do: do_play(generate_number(), 5)

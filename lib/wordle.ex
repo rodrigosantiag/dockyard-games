@@ -18,18 +18,27 @@ defmodule Games.Wordle do
 
     result = feedback(word, guess)
 
-    cond do
-      all_green?(result) ->
-        ["You win! Word was #{word}"]
-
-      true ->
-        IO.puts("Feedback: #{Enum.join(result, ", ")}")
-        do_play(attempt - 1, word)
+    if all_green?(result) do
+      ["You win! Word was #{word}"]
+    else
+      IO.puts("Feedback: #{Enum.join(result, ", ")}")
+      do_play(attempt - 1, word)
     end
   end
 
   @doc """
   Give feedback on the guess
+
+  ## Examples
+
+    iex> Games.Wordle.feedback("toast", "toast")
+    [:green, :green, :green, :green, :green]
+
+    iex> Games.Wordle.feedback("toast", "tarts")
+    [:green, :yellow, :grey, :yellow, :yellow]
+
+    iex> Games.Wordle.feedback("toast", "hellz")
+    [:grey, :grey, :grey, :grey, :grey]
   """
   @spec feedback(String.t(), String.t()) :: [String.t()]
   def feedback(word, guess) do
