@@ -3,6 +3,9 @@ defmodule Games.RockPaperScissors do
   Rock, Paper, Scissors game
   """
 
+  alias Games.ScoreTracker
+  alias Games
+
   @doc """
   Play the game
   """
@@ -12,9 +15,18 @@ defmodule Games.RockPaperScissors do
     answer = String.trim(IO.gets("Choose rock, paper, or scissors: "))
 
     cond do
-      answer == ai_answer -> IO.puts("It's a tie!")
-      beats?(answer, ai_answer) -> IO.puts("You win! #{answer} beats #{ai_answer}.")
-      true -> IO.puts("You lose! #{ai_answer} beats #{answer}.")
+      answer == ai_answer ->
+        IO.puts("It's a tie!")
+        Games.main([])
+
+      beats?(answer, ai_answer) ->
+        ScoreTracker.add_points(10)
+        IO.puts("You win! #{answer} beats #{ai_answer}.")
+        Games.main([])
+
+      true ->
+        IO.puts("You lose! #{ai_answer} beats #{answer}.")
+        Games.main([])
     end
   end
 

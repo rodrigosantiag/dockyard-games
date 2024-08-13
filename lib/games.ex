@@ -15,15 +15,34 @@ defmodule Games do
       3. Wordle
 
       enter "stop" to exit
+      enter "score" to view your current score
       """)
       |> String.trim()
 
     case option do
-      "1" -> Games.GuessingGame.play()
-      "2" -> Games.RockPaperScissors.play()
-      "3" -> Games.Wordle.play()
-      "stop" -> IO.puts("Goodbye!")
-      _ -> IO.puts("Invalid option")
+      "1" ->
+        Games.GuessingGame.play()
+
+      "2" ->
+        Games.RockPaperScissors.play()
+
+      "3" ->
+        Games.Wordle.play()
+
+      "stop" ->
+        IO.puts("Goodbye!")
+
+      "score" ->
+        IO.puts("""
+        ==================================================
+        Your score is #{Games.ScoreTracker.current_score()}
+        ==================================================
+        """)
+
+        main([])
+
+      _ ->
+        IO.puts("Invalid option")
     end
   end
 end

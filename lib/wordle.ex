@@ -3,6 +3,9 @@ defmodule Games.Wordle do
   Wordle game
   """
 
+  alias Games.ScoreTracker
+  alias Games
+
   @max_attempts 6
 
   @doc """
@@ -11,7 +14,10 @@ defmodule Games.Wordle do
   @spec play() :: :ok
   def play, do: do_play(@max_attempts, pick_word())
 
-  defp do_play(0, word), do: IO.puts("You lose! Word was #{word}")
+  defp do_play(0, word) do
+    IO.puts("You lose! Word was #{word}")
+    Games.main([])
+  end
 
   defp do_play(attempt, word) do
     guess = IO.gets("Enter a five letter word: ") |> String.trim()
@@ -19,7 +25,9 @@ defmodule Games.Wordle do
     result = feedback(word, guess)
 
     if all_green?(result) do
+      ScoreTracker.add_points(20)
       IO.puts("You win! Word was #{word}")
+      Games.main([])
     else
       IO.puts("Feedback: #{Enum.join(result, ", ")}")
       do_play(attempt - 1, word)
